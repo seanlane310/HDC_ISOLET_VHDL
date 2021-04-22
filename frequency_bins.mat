@@ -33,35 +33,13 @@ fprintf("done");
 plot(average);
 
 %% Project Frequency Bins onto Hypervectors
-BaseVectors(1,:) = randi([0,1],1,1000);
-%BaseVectors(1,BaseVectors(1,:) == 0) = -1;
+for v = 1:10
+    BaseVectors(v,:) = randi([0,1],1,1000);
+end
 
-BaseVectors(2,:) = randi([0,1],1,1000);
-%BaseVectors(2, BaseVectors(2,:) == 0) = -1;
-
-BaseVectors(3,:) = randi([0,1],1,1000);
-%BaseVectors(3,BaseVectors(3,:) == 0) = -1;
-
-BaseVectors(4,:) = randi([0,1],1,1000);
-%BaseVectors(4, BaseVectors(4,:) == 0) = -1;
-
-BaseVectors(5,:) = randi([0,1],1,1000);
-%BaseVectors(5, BaseVectors(5,:) == 0) = -1;
-
-BaseVectors(6,:) = randi([0,1],1,1000);
-%BaseVectors(6, BaseVectors(6,:) == 0) = -1;
-
-BaseVectors(7,:) = randi([0,1],1,1000);
-%BaseVectors(7, BaseVectors(7,:) == 0) = -1;
-
-BaseVectors(8,:) = randi([0,1],1,1000);
-%BaseVectors(8, BaseVectors(8,:) == 0) = -1;
-
-BaseVectors(9,:) = randi([0,1],1,1000);
-%BaseVectors(9, BaseVectors(9,:) == 0) = -1;
-
-BaseVectors(10,:) = randi([0,1],1,1000);
-%BaseVectors(10, BaseVectors(10,:) == 0) = -1;
+for e = 1:100
+    IDVectors(e,:) = randi([0,1],1,1000);
+end
 
 %% Encode Hypervectors Together
 
