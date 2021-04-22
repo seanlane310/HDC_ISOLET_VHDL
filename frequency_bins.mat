@@ -1,38 +1,63 @@
 %%Frequency Bin Creation Test
+%Audio Record
 
-r = audiorecorder(44100,16,1);
-record(r);
-fprintf("1");
-pause(2);
-stop(r);
-y = getaudiodata(r,'double');
+for audioid = 1:11
+    r(audioid) = audiorecorder(44100,16,1);
+    record(r(audioid));
+    fprintf(audioid);
+    pause(2);
+    stop(r(audioid));
+    fprintf("stop")
+    y(:,audioid) = getaudiodata(r(audioid),'double');
+    pause(2);
+end
 
-%% Do Processing
-plot(y);
+%r = audiorecorder(44100,16,1);
+%record(r);
+%fprintf("1");
+%pause(2);
+%stop(r);
+%y = getaudiodata(r,'double');
+
+%% Create Frequency Bins
+
+for s = 1:11
+    subplot(4,3,s), plot(y(:,s));
+    title("Raw Audio " + s);
+end
 
 pause(5);
 
-N = 0:length(y)-1;
+N = 0:length(y(:,1))-1; 
 
-X = fft(y); %need to trim it before get here
-plot(abs(X(1:length(X)/16)));
+X(:,1:11) = fft(y(:,1:11)); %need to trim it before get here
 
-Z = abs(X);
+for s = 1:11
+    subplot(4,3,s), plot(abs(X(1:length(X)/16,s)));
+    title("FFT " + s);
+    Z(:,s) = abs(X(:,s));
+end
 
-total = length(1:length(X)/16);
+total = length(1:length(X(:,1))/16);
 bins = 100;
 
 binsize = total/bins;
 
-for i = 1:bins
-        average(i) = mean(Z((i*binsize)+1:((i+1)*binsize)));
+for s = 1:11
+    for i = 1:bins
+        average(s,i) = mean(Z((i*binsize)+1:((i+1)*binsize),s));
+    end
 end
 
 fprintf("done");
 
-plot(average);
+for s = 1:11
+    subplot(4,3,s), plot(average(s,:));
+    title("Freq Bins, Recording #" + s);
+end
 
 %% Project Frequency Bins onto Hypervectors
+
 for v = 1:10
     BaseVectors(v,:) = randi([0,1],1,1000);
 end
@@ -41,47 +66,4 @@ for e = 1:100
     IDVectors(e,:) = randi([0,1],1,1000);
 end
 
-%% Encode Hypervectors Together
-
-binHV = HVEncoder(0.2467,BaseVectors);
-
-for i=1:5
-    binHV(i);
-end
-
-% for random set of HVs where 0-9 --> HVS[0] - HWS[9]
-% get digits of x.xxxx by times 10,000 then mod 10 for each digit
-% use digits to get HV for each digit then perm and multiply
-
-function [binHV] = HVEncoder(bin, digitHVs)
-
-    bind = bin * 10000;
-    
-    for i=1:5
-        digitR(i) = mod(bind,10);
-        bind = floor(bind/10);
-    end
-    
-    product = digitHVs(digitR(5)+1,:);
-    for i=4:-1:1
-        product = product .* circshift(digitHVs(digitR(i)+1,:),5-i);
-    end
-    
-    binHV = product;
-
-end
-
-%% Old Encoder
-
-%Permutate, add, multiply (ppA + pB + C)
-
-%A = [1, 9, 4, 3, 7, 6, 4, 2, 9, 6, 17, 8, 3, 22, 47, 3, 9, 6, 2, 0];
-
-%Permutate
-%C = circshift(A,-1);
-
-%Addition
-%D = A + B';
-
-%Multiply
-%E = A .* B';
+%% Add Encoder Below
