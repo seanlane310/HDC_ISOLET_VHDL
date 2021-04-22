@@ -4,11 +4,12 @@
 for audioid = 1:11
     r(audioid) = audiorecorder(44100,16,1);
     record(r(audioid));
-    fprintf(audioid);
+    fprintf("%i\n",audioid);
     pause(2);
     stop(r(audioid));
-    fprintf("stop")
-    y(:,audioid) = getaudiodata(r(audioid),'double');
+    fprintf("stop\n")
+    x = getaudiodata(r(audioid),'double');
+    y(:,audioid) = x(1:87040);
     pause(2);
 end
 
@@ -49,7 +50,7 @@ for s = 1:11
     end
 end
 
-fprintf("done");
+fprintf("Done\n");
 
 for s = 1:11
     subplot(4,3,s), plot(average(s,:));
