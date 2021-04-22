@@ -10,7 +10,7 @@ digitHVs(7,:) = [1,-1,1,-1,1];
 digitHVs(8,:) = [1,-1,1,-1,1];
 digitHVs(9,:) = [1,-1,1,-1,1];
 digitHVs(10,:) = [1,-1,1,-1,1];
-binHV = encoder(0.2467,digitHVs);
+binHV = HVEncoder(0.2467,digitHVs);
 
 for i=1:5
     fprintf("%4.2f\n",binHV(i));
@@ -20,7 +20,7 @@ end
 % get digits of x.xxxx by times 10,000 then mod 10 for each digit
 % use digits to get HV for each digit then perm and multiply
 
-function [binHV] = encoder(bin, digitHVs)
+function [binHV] = HVEncoder(bin, digitHVs)
 
     bind = bin * 10000;
     
