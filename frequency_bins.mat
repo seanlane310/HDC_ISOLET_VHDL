@@ -29,3 +29,23 @@ for i = 1:bins
 end
 
 fprintf("done");
+
+plot(average);
+
+%% Project Frequency Bins onto Hypervectors
+
+
+%% Encode Hypervectors Together
+%Permutate, add multiply (ppA + pB + C)
+
+A = [1, 9, 4, 3, 7, 6, 4, 2, 9, 6, 17, 8, 3, 22, 47, 3, 9, 6, 2, 0];
+%order = [2:20, 1];
+%B = permute(A,order);
+C = circshift(A,-1);
+
+%D = plus(A,B);
+%for z = 1:length(A)
+%    D(z) = A(z) + B(z);
+%end
+
+D = A + B';
