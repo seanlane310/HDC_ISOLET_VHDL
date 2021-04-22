@@ -33,19 +33,46 @@ fprintf("done");
 plot(average);
 
 %% Project Frequency Bins onto Hypervectors
+BaseVectors1 = randi([0,1],1,1000);
+BaseVectors1(BaseVectors1 == 0) = -1;
 
+BaseVectors2 = randi([0,1],1,1000);
+BaseVectors2(BaseVectors2 == 0) = -1;
+
+BaseVectors3 = randi([0,1],1,1000);
+BaseVectors3(BaseVectors3 == 0) = -1;
+
+BaseVectors4 = randi([0,1],1,1000);
+BaseVectors4(BaseVectors4 == 0) = -1;
+
+BaseVectors5 = randi([0,1],1,1000);
+BaseVectors5(BaseVectors5 == 0) = -1;
+
+BaseVectors6 = randi([0,1],1,1000);
+BaseVectors6(BaseVectors6 == 0) = -1;
+
+BaseVectors7 = randi([0,1],1,1000);
+BaseVectors7(BaseVectors7 == 0) = -1;
+
+BaseVectors8 = randi([0,1],1,1000);
+BaseVectors8(BaseVectors8 == 0) = -1;
+
+BaseVectors9 = randi([0,1],1,1000);
+BaseVectors9(BaseVectors9 == 0) = -1;
+
+BaseVectors10 = randi([0,1],1,1000);
+BaseVectors10(BaseVectors10 == 0) = -1;
 
 %% Encode Hypervectors Together
-%Permutate, add multiply (ppA + pB + C)
+%Permutate, add, multiply (ppA + pB + C)
 
 A = [1, 9, 4, 3, 7, 6, 4, 2, 9, 6, 17, 8, 3, 22, 47, 3, 9, 6, 2, 0];
-%order = [2:20, 1];
-%B = permute(A,order);
+
+%Permutate
 C = circshift(A,-1);
 
-%D = plus(A,B);
-%for z = 1:length(A)
-%    D(z) = A(z) + B(z);
-%end
-
+%Addition
 D = A + B';
+
+%Multiply
+E = A .* B';
