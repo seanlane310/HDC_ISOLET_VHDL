@@ -1,15 +1,3 @@
-%% Testing Train
-clc; clear all; close all;
-
-HV_set1(1,:) = [0,1,-1,0,1];
-HV_set1(2,:) = [0,1,-1,0,1];
-HV_set1(3,:) = [1,1,-1,-1,1];
-HV_set2(:,:) = HV_set1;
-HV_sets(:,:,1) = HV_set1;
-HV_sets(:,:,2) = HV_set2;
-
-class_HVs = Train(HV_sets);
-
 %% Training Function
 % Takes HV_sets, a three-dimensional array that represents the full set of
 %       all of the hypervectors, where each is a one-dimensional array, and
