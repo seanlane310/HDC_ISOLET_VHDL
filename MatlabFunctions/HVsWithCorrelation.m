@@ -6,7 +6,7 @@ for v = 1:10
         BaseVectors(v,:) = randi([0,1],1,100);
     else
         BaseVectors(v,:) = BaseVectors(v-1,:);
-        rand = randi(M,(D/M-v),1);
+        rand = randi(D,(D/M-v),1);
         for i = 1:length(rand)
             BaseVectors(v,rand(i)) = ~BaseVectors(v,rand(i));
         end
