@@ -1,3 +1,21 @@
+%% Training Phase Testing
+clc; clear all; close all;
+
+audioA = RecordAudio11();
+audioB = RecordAudio11();
+
+binsA = GetFreqBins(audioA, 100);
+binsB = GetFreqBins(audioB, 100);
+
+[digitHV, posHV] = GetBaseHVs(100);
+
+for i = 1:11
+    enc_hvs(i,:,1) = AudioEncoder(binsA(i,:),digitHV,posHV);
+    enc_hvs(i,:,2) = AudioEncoder(binsB(i,:),digitHV,posHV);
+end
+
+class_HVs = Train(enc_hvs);
+
 function [audioData] = RecordAudio11()
 %% Audio Recording
 % Records 2 seconds of audio 11 times, for a total of 22 seconds.
@@ -14,7 +32,8 @@ function [audioData] = RecordAudio11()
         stop(r(audioid));
         fprintf("stop\n");
         x = getaudiodata(r(audioid),'double');
-        y(:,audioid) = x(1:87040);
+        temp = x(1:87040);
+        y(:,audioid) = temp;
         pause(2);
     end
     
@@ -39,11 +58,11 @@ function [bin_values] = GetFreqBins(audioData, num_bins)
     
     total = length(1:length(X(:,1))/16);
     
-    binsize = total/bins;
+    binsize = total/num_bins;
     
     for s = 1:11
         for i = 1:num_bins
-            average(s,i) = mean(Z((i*binsize)+1:((i+1)*binsize),s));
+            average(s,i) = mean(Z(round((i*binsize)+1):round((i+1)*binsize),s));
         end
     end
     
@@ -66,7 +85,7 @@ function [digit_HVs, pos_HVs] = GetBaseHVs(num_bins)
     D = 100;
     M = 10;
     
-    num_HVs(1,:) = randi([0,1],1,num_bins);
+    num_HVs(1,:) = randi([0,1],1,1000);
     for d = 2:10
         num_HVs(d,:) = num_HVs(d-1,:);
         rand = randi(D,(D/M-d),1);
@@ -115,9 +134,9 @@ function [audio_HV] = AudioEncoder(bin_values, digit_HVs, pos_HVs)
         level_HVs(i,:) = BinEncoder(scaled_bins(i), digit_HVs);
     end
     
-    audioHV = level_HVs(1,:) .* pos_HVs(1,:);
+    audio_HV = level_HVs(1,:) .* pos_HVs(1,:);
     for i = 2:length(level_HVs(1))
-        audioHV = audioHV + level_HVs(i,:) .* pos_HVs(i,:);
+        audio_HV = audio_HV + (level_HVs(i,:) .* pos_HVs(i,:));
     end
 end
 
@@ -158,8 +177,6 @@ function [class_HVs] = Train(HV_sets)
 % 
 % Returns class_HVs, a two-dimensional array of the trained class
 %       hypervectors that are represented as one-dimensional arrays
-
-    size(HV_sets,3);
 
     for i = 1:size(HV_sets,3)
         class_set = HV_sets(:,:,i);
