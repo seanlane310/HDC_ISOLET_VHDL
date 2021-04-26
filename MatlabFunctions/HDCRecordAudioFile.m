@@ -1,3 +1,4 @@
+%Save audio_sets after to import in training or encoding
 % Set global variables
 classes = 6; %      Number of different letters being used
 records = 33; %     Number of audio samples to be recorded
