@@ -22,15 +22,7 @@ for i = 1:classes
 end
 
 
-%% Sample inference test
 test_HVs = enc_HVs(records,:,:);
-
-for i = 1:classes
-    for j = 1:classes
-        fprintf("%i\n", sum(xor(class_HVs(i,:),test_HVs(1,:,j))));
-    end
-    fprintf("%i\n\n", sum(xor(class_HVs(i,:),class_HVs((mod(i,3)+1),:))));
-end
 
 
 function [bin_values] = GetFreqBins(audioData, num_bins)
