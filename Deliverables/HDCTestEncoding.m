@@ -7,9 +7,9 @@ classes = 6; %      Number of different letters being used
 records = 1; %     Number of audio samples to be recorded
 bins = 1000; %      Number of sections audio is split into
 
-preloaddigit = load('digitHVsthree');
+preloaddigit = load('digitHVsthree.mat');
 digitHV = preloaddigit.digitHV;
-preloadpos =  load('posHVsthree');
+preloadpos =  load('posHVsthree.mat');
 posHV = preloadpos.posHV;
 prerecorded = load('SeanVowels1Tests.mat');
 
