@@ -1,1 +1,3 @@
 
+Accuracy: 2/6
+Only guessed 0 or 4
