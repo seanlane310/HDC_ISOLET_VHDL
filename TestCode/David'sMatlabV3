@@ -106,7 +106,6 @@ function [digit_HVs, pos_HVs] = GetBaseHVs(num_bins)
 
 end
 
-
 function [audio_HV] = AudioEncoder(bin_values, digit_HVs, pos_HVs)
 %% Audio-Hypervector Encoding
 % Encodes the audio sample into one hypervector using the audio bins and
