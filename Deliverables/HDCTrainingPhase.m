@@ -11,9 +11,9 @@ bins = 1000; %      Number of sections audio is split into
 %[digitHV, posHV] = GetBaseHVs(bins);
 
 %use if have presaved HVs
-preloaddigit = load('digitHVs');
+preloaddigit = load('digitHVsthree.mat');
 digitHV = preloaddigit.digitHV;
-preloadpos =  load('posHVs');
+preloadpos =  load('posHVsthree.mat');
 posHV = preloadpos.posHV;
 prerecorded = load('SeanVowels33Trials.mat');
 audio_sets = prerecorded.audio_sets;
