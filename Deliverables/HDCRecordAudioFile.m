@@ -3,7 +3,6 @@
 % Set global variables
 classes = 6; %      Number of different letters being used
 records = 1; %     Number of audio samples to be recorded
-bins = 1000; %      Number of sections audio is split into
 
 for i = 1:classes
     audio_sets(:,:,i) = RecordAudio(records);
