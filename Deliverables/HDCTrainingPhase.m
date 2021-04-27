@@ -8,13 +8,13 @@ records = 33; %     Number of audio samples to be recorded
 bins = 1000; %      Number of sections audio is split into
 
 %use if need to generate HVs
-[digitHV, posHV] = GetBaseHVs(bins);
+%[digitHV, posHV] = GetBaseHVs(bins);
 
 %use if have presaved HVs
-% preloaddigit = load('digitHVs');
-% digitHV = preloaddigit.digitHV;
-% preloadpos =  load('posHVs');
-% posHV = preloadpos.posHV;
+preloaddigit = load('digitHVs');
+digitHV = preloaddigit.digitHV;
+preloadpos =  load('posHVs');
+posHV = preloadpos.posHV;
 prerecorded = load('SeanVowels33Trials.mat');
 audio_sets = prerecorded.audio_sets;
 
@@ -86,6 +86,7 @@ function [digit_HVs, pos_HVs] = GetBaseHVs(num_bins)
     D = 10000;
     M = 10;
     
+    %   this method is for correlated digitHVs
 %     num_HVs(1,:) = randi([0,1],1,D);
 %     for d = 2:10
 %         num_HVs(d,:) = num_HVs(d-1,:);
@@ -103,7 +104,7 @@ function [digit_HVs, pos_HVs] = GetBaseHVs(num_bins)
 %         end
 %     end
     
-    
+    %   this method is for non-correlated digitHVs
     for p = 1:M
         num_HVs(p,:) = randi([0,1],1,D);
     end
