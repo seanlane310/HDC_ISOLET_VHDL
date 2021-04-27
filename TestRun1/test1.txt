@@ -1,5 +1,5 @@
 
-Accuracy: 2/6
+Accuracy: 1/6
 Only guessed 0 or 4
 
 Main Characteristics:
