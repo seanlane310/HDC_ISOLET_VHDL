@@ -1,3 +1,8 @@
 
 Accuracy: 2/6
 Only guessed 0 or 4
+
+Main Characteristics:
+Sum digitHVs of bin after shifting 1,2,3,4
+All HVs are 1s and 0s
+digitHVs are correlated (1 positive correlation to 2, negative to 9 etc. 0 is completely random)
