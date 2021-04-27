@@ -1,2 +1,6 @@
 Accuracy: 1/6
 Only guessed 0 or 4
+
+Main Changes: 
+Switched back from adding the digitHVs after shifting to multiplying (since this is supposed to be bind)
+Went from 0s and 1s in digitHVs to -1s and 1s (so that the multiplying wouldn't just cause hypervectors to be 0'ed out)
