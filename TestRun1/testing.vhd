@@ -22,6 +22,7 @@ architecture behave of testing is
     classes : in slv_arrayclass)
     return integer is
     variable closest: integer:= 0;
+    variable mostsame: integer:= 0;
     variable numclasses: integer:= 6; --number of classes (letters) we are checking
     variable numdimensions: integer:= 10000; --number of dimensions for HVs
     variable same: std_logic;
@@ -35,9 +36,8 @@ architecture behave of testing is
 				amountsame(i) := amountsame(i) + 1;
 			end if;
 		end loop L2;
-		if (i = 0) then
-			closest := i;
-		elsif (amountsame(i) > amountsame(i-1)) then
+		if (amountsame(i) > mostsame) then
+			mostsame := amountsame(i);
 			closest := i;	
 		end if;
   	end loop L1;
